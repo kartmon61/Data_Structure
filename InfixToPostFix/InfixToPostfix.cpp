@@ -64,7 +64,8 @@ int _compare(char item){
 //infix를 postfix로 바꾸는 함수
 void infixToPostfix(string infix){
     string result;
-    
+    int lparen=0;
+    int rparen=0;
     //infix의 길이 만큼 동작
     for(int i=0;i<infix.length();i++){
         //infix의 처음에 -가 있을때,
@@ -83,7 +84,7 @@ void infixToPostfix(string infix){
         }
         //infix의 i번째에 (가 있을때,
         else if(infix[i]=='('){
-            
+            lparen++;
             _push(infix[i]);
             //양수 음수 표현
             if(infix[i+1] == '-'){
@@ -96,6 +97,7 @@ void infixToPostfix(string infix){
         }
         //infix의 i번째에 )가 있을때,
         else if (infix[i] == ')'){
+            rparen++;
             //스택에 ( 를 찾을때 까지 pop하여 result에 추가
             while(stack[top] != '(' && top !=-1){
                 
@@ -138,12 +140,18 @@ void infixToPostfix(string infix){
             
         }
     }
-    
+    //괄호의 갯수가 맞지 않을때,
+    if(lparen!=rparen){
+        cout << "올바르지 않은 괄호 연산자 사용입니다.\n";
+        exit(1);
+    }
     //스택에 들어있던 연산자 모두 pop하여 출력
     while(top!=-1){
         
         result=result+" "+_pop();
     }
+    
+    
     cout << result << endl;
     
     
