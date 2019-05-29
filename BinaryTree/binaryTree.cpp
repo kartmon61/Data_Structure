@@ -73,8 +73,8 @@ int main(){
     root->l_child->l_child = new_node(1);
     root->l_child->r_child = new_node(3);
 
-
-
+    
+    
     cout << "preorder: ";
     preorder(root);
     cout << endl;
